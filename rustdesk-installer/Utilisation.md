@@ -1,8 +1,12 @@
-Fire un clic-droit dans une zone vide du répertoire « Installer-Rustdesk »,
-choisissez « Ouvrir un terminal ici ». Dans le terminal, saisissez ou
+# Utilisation
+
+Faire un clic-droit dans une zone vide du répertoire `Installer-Rustdesk`,
+choisissez `Ouvrir un terminal ici`. Dans le terminal, saisissez ou
 copiez-collez la ligne suivante:
 
+```bash
 ./Installer-rustdesk.sh
+```
 
 (avec le "./" au début de la ligne et un "i" majuscule à "Installer"), puis
 appuyez sur la touche Entrée du clavier. Fournissez votre mot de passe quand
