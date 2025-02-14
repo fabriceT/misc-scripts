@@ -1,13 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
-unset KEYNUMBER
 export TEXTDOMAIN=getkey.sh
 export TEXTDOMAINDIR="/usr/share/locale"
 
 echo $"Please provide the key signature you want to add?"
-read KEY
-if [ -n "$KEY" ]; then
-	KEYNUMBER="-${KEY}"
-fi
+read -r KEY
 
-sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com $KEY
+sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com "$KEY"
