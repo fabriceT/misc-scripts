@@ -17,14 +17,14 @@ directory="$HOME/Downloads"
 if [ ! -d "${directory}" ]; then
   # If the directory doesn't exist, create it
   mkdir "${directory}"
-  echo "The folder “Directory” has been created."
+  echo "The folder \“Directory\” has been created."
 else
-  echo "The folder “Directory” already exists."
+  echo "The folder \“Directory\” already exists."
 fi
 
 # Download latest Rustdesk version into the Downloads directory
 echo -e "Downloading the rustdesk package\n"
-curl -L -O --output-dir ${directory}/ "https://github.com/rustdesk/rustdesk/releases/download/${version}/rustdesk-${version}-${arch}.deb"
+curl -L -O --output-dir "${directory}"/ "https://github.com/rustdesk/rustdesk/releases/download/${version}/rustdesk-${version}-${arch}.deb"
 
 sleep 2
 
