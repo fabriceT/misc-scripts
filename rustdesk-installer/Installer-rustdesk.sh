@@ -1,23 +1,38 @@
 #!/bin/bash
 
-version=1.3.6
+# Variable for the Rustdesk version to install
+version=1.3.7
+arch=x86_64
 
-# Vérifier si la connexion internet est active
+# Check if the internet connection is active
 if ! ping -c 3 www.example.com; then
-	echo -e "Pas de connexion internet, verifier votre connexion et ré-essayez"
+	echo -e "The internet connection isn't active, please check your connection and retry"
 	exit 1
 fi
 
-cd "${HOME}/Téléchargements" || exit 1
+# Variable to store the directory path
+directory="$HOME/Downloads"
 
-echo -e "téléchargement du paquet rustdesk\n"
-wget -c "https://github.com/rustdesk/rustdesk/releases/download/${version}/rustdesk-${version}-x86_64.deb"
+# Check if the target directory exists
+if [ ! -d "${directory}" ]; then
+  # If the directory doesn't exist, create it
+  mkdir "${directory}"
+  echo "The folder “Directory” has been created."
+else
+  echo "The folder “Directory” already exists."
+fi
+
+# Download latest Rustdesk version into the Downloads directory
+echo -e "Downloading the rustdesk package\n"
+# curl -L -O "https://github.com/rustdesk/rustdesk/releases/download/${version}/rustdesk-${version}-${arch}.deb" -o "${directory}/rustdesk-${version}-${arch}.deb"
+
+curl -L -O --output-dir ${directory}/ "https://github.com/rustdesk/rustdesk/releases/download/${version}/rustdesk-${version}-${arch}.deb"
 
 sleep 2
 
 cat <<EOF
-Le paquet gstreamer1.0-pipewire est-il installé ? Si il n'est pas installé on l'installe.
-De plus, nous ajoutons la source et installons la version fournie par le paquet communautaire pipewire-debian.
+Is the gstreamer1.0-pipewire package installed ? If not we install it.
+Additionnally we are adding the pipewire-debian community package source in to install that version.
 EOF
 sleep 2
 
@@ -30,10 +45,17 @@ if ! status="$(dpkg-query -W --showformat='${db:Status-Status}' "${pkg}" 2>&1)" 
 	sleep 3
 fi
 
-echo -e "installation du paquet rustdesk précédemment téléchargé\n"
-sudo dpkg -i "${HOME}/Téléchargements/rustdesk-${version}-x86_64.deb"
+echo -e "Installation of the Rustdesk package previously downloaded\n"
+sudo dpkg -i "${directory}/rustdesk-${version}-x86_64.deb"
 
 sleep 2
 
-echo -e "Si il manque une dépendance, en forcer l'installation\n"
+echo -e "If a dependancy is missing, force its installation\n"
 sudo apt-get -f install -y
+
+# Checking possible remaining errors
+sudo dpkg -i "${directory}/rustdesk-${version}-x86_64.deb"
+if [ $? -ne 0 ]; then
+    echo "Error installing Rustdesk package."
+    exit 1
+fi
