@@ -24,8 +24,6 @@ fi
 
 # Download latest Rustdesk version into the Downloads directory
 echo -e "Downloading the rustdesk package\n"
-# curl -L -O "https://github.com/rustdesk/rustdesk/releases/download/${version}/rustdesk-${version}-${arch}.deb" -o "${directory}/rustdesk-${version}-${arch}.deb"
-
 curl -L -O --output-dir ${directory}/ "https://github.com/rustdesk/rustdesk/releases/download/${version}/rustdesk-${version}-${arch}.deb"
 
 sleep 2
