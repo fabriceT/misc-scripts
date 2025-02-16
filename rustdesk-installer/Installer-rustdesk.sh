@@ -55,7 +55,7 @@ sudo apt-get -f install -y
 
 # Checking possible remaining errors
 sudo dpkg -i "${directory}/rustdesk-${version}-x86_64.deb"
-if [ $? -ne 0 ]; then
+if ! $? ; then
     echo "Error installing Rustdesk package."
     exit 1
 fi
