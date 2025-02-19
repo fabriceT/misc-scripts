@@ -65,10 +65,8 @@ fi
 
 # Optional lines as the temporary files are stored in /tmp
 # Cleaning temporary directories with their contents
-
-cd /tmp
 sleep 1
 sudo chmod 0644 RustDesk/*
-sudo rm -rf RustDesk/*
-sudo rm -rf tmp.*/*
-sudo rmdir tmp.*
+sudo rm -rf /tmp/RustDesk/*
+rm -rf /tmp/tmp.*/* # sudo pour les deux (peut causer des erreurs si l'utilisateur n'a pas les droits sur tmp.*)
+rmdir /tmp/tmp.*
