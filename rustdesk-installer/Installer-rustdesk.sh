@@ -1,20 +1,26 @@
 #!/bin/bash
 
-set -euo pipefail
+# Author Joyce MARKOLL <meets@gmx.fr>
+# Contributeor Fabrice THIROUX <fabrice.thiroux@free.fr>
+
+# Debug
+set -x
 
 # Variable for the Rustdesk version to install
-version=1.3.7
-arch=x86_64
-rustdesk_package=rustdesk-${version}-${arch}.deb
+version="1.3.7"
+arch="x86_64"
 
-# Check if the internet connection is active
-if ! ping -c 3 www.example.com; then
-    echo  "No internet connection, please check connectivity"
-	exit 1
-fi
+# Variable for the package name
+rustpkg="rustdesk-${version}-${arch}.deb"
 
 # Variable to store the directory path
 directory=$(mktemp -d)
+
+# Check if the internet connection is active
+if ! ping -c 3 www.example.com; then
+	echo -e "The internet connection isn't active, please check your connection and retry"
+	exit 1
+fi
 
 # Check if the target directory exists
 if [[ ! -d "${directory}" ]]; then
@@ -24,13 +30,13 @@ if [[ ! -d "${directory}" ]]; then
 fi
 
 # Download latest Rustdesk version into the Downloads directory
-echo "Downloading the rustdesk package"
-curl -L -O --output-dir "${directory}"/ "https://github.com/rustdesk/rustdesk/releases/download/${version}/${rustdesk_package}"
+echo -e "Downloading the rustdesk package\n"
+curl -L -O --output-dir "${directory}"/ "https://github.com/rustdesk/rustdesk/releases/download/${version}/${rustpkg}"
 
 sleep 2
 
 cat <<EOF
-Is the gstreamer1.0-pipewire package installed ? If not, we install it.
+Is the gstreamer1.0-pipewire package installed ? If not we install it.
 Additionnally we are adding the pipewire-debian community package source in to install that version.
 EOF
 sleep 2
@@ -44,17 +50,25 @@ if ! status="$(dpkg-query -W --showformat='${db:Status-Status}' "${pkg}" 2>&1)" 
 	sleep 3
 fi
 
-echo "Installation of the Rustdesk package"
-sudo dpkg -i "${directory}/${rustdesk_package}"
-
-sleep 2
-
-echo "If a dependancy is missing, force its installation"
+echo "Installing the Rustdesk package"
+sudo dpkg -i "${directory}/${rustpkg}"
+echo -e "If a dependancy is missing, force its installation\n"
 sudo apt-get -f install -y
 
 # Checking possible remaining errors
-sudo dpkg -i "${directory}/${rustdesk_package}"
-if ! $? ; then
+if dpkg -s rustdesk | grep "Status: install" > /dev/null 2>&1; then
+    echo "Rustdesk was installed successfully."
+else
     echo "Error installing Rustdesk package."
     exit 1
 fi
+
+# Optional lines as the temporary files are stored in /tmp
+# Cleaning temporary directories with their contents
+
+cd /tmp
+sleep 1
+sudo chmod 0644 RustDesk/*
+sudo rm -rf RustDesk/*
+sudo rm -rf tmp.*/*
+sudo rmdir tmp.*
