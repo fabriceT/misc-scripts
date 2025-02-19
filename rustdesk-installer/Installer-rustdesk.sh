@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Author Joyce MARKOLL <meets@gmx.fr>
-# Contributeor Fabrice THIROUX <fabrice.thiroux@free.fr>
+# Contributor Fabrice THIROUX <fabrice.thiroux@free.fr>
 
 # Debug
 set -x
@@ -68,5 +68,6 @@ fi
 sleep 1
 sudo chmod 0644 RustDesk/*
 sudo rm -rf /tmp/RustDesk/*
-rm -rf /tmp/tmp.*/* # sudo pour les deux (peut causer des erreurs si l'utilisateur n'a pas les droits sur tmp.*)
+rm -rf /tmp/tmp.*/*
 rmdir /tmp/tmp.*
+
