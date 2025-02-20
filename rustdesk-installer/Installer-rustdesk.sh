@@ -41,7 +41,7 @@ Additionnally we are adding the pipewire-debian community package source in to i
 EOF
 sleep 2
 
-pkg=gstreamer1.0-pipewire
+pkg="gstreamer1.0-pipewire"
 
 if ! status="$(dpkg-query -W --showformat='${db:Status-Status}' "${pkg}" 2>&1)" || [[ ! "${status}" = installed ]]; then
 	echo sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream -y 2>&1
@@ -66,7 +66,7 @@ fi
 # Optional lines as the temporary files are stored in /tmp
 # Cleaning temporary directories with their contents
 sleep 1
-sudo chmod 0644 RustDesk/*
+sudo chmod 0644 /tmp/RustDesk/*
 sudo rm -rf /tmp/RustDesk/*
 rm -rf /tmp/tmp.*/*
 rmdir /tmp/tmp.*
