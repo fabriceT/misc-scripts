@@ -1,6 +1,6 @@
 # Utilisation
 
-Faire un clic-droit dans une zone vide du répertoire `Installer-Rustdesk`,
+Faire un clic-droit dans une zone vide du répertoire `rustdesk-installer`,
 choisissez `Ouvrir un terminal ici`. Dans le terminal, saisissez ou
 copiez-collez la ligne suivante:
 
