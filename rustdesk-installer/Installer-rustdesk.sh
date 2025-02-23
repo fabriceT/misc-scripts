@@ -54,7 +54,7 @@ if ! status="$(dpkg-query -W --showformat='${db:Status-Status}' "${pkg}" 2>&1)" 
 fi
 
 # Install the dependencies and the previously downloaded package
-read -p "Do you want to install Rustdesk ? (Y/n) " install_rustdesk
+read -r -p "Do you want to install Rustdesk ? (Y/n) " install_rustdesk
 if [[ "$install_rustdesk" == "Y" ]]; then
 
 # Install the dependencies and the Debian package using apt-get
