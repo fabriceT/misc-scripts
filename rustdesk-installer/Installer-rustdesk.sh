@@ -7,7 +7,7 @@
 set -euo pipefail
 
 # Variable for the Rustdesk version to install
-version="1.3.7"
+version="1.3.8"
 arch="x86_64"
 
 # Variable for the package name
