@@ -27,5 +27,4 @@ copy and paste the following line:
 
 (with “./” at the beginning of the line and a capital “i” for “Install”), then
 press Enter on your keyboard. Provide your password when the script asks for it.
-Inform your IT support when it's done.
-
+Inform your IT support when it's done. 
