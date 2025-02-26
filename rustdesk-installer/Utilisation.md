@@ -5,7 +5,9 @@ choisissez `Ouvrir un terminal ici`. Dans le terminal, saisissez ou
 copiez-collez la ligne suivante:
 
 ```bash
+
 ./Installer-rustdesk.sh
+
 ```
 
 (avec le "./" au début de la ligne et un "i" majuscule à "Installer"), puis
@@ -21,9 +23,12 @@ choose `Open a terminal here`. In the terminal, type or
 copy and paste the following line:
 
 ```bash
+
 ./Installer-rustdesk.sh
+
 ```
 (with “./” at the beginning of the line and a capital “i” for “Install”), then
 press Enter on your keyboard. Provide your password when the script asks for it.
 
 Inform your IT support when it's done.
+
