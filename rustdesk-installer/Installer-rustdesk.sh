@@ -7,7 +7,7 @@
 set -euo pipefail
 
 # Variable for the Rustdesk version to install
-version="1.3.8"
+version="1.4.9"
 arch="x86_64"
 
 # Variable for the package name
@@ -46,11 +46,14 @@ sleep 2
 pkg="gstreamer1.0-pipewire"
 
 if ! status="$(dpkg-query -W --showformat='${db:Status-Status}' "${pkg}" 2>&1)" || [[ ! "${status}" = installed ]]; then
-    echo "Adding pipewire PPA and installing gstreamer1.0-pipewire..." # Descriptive message
-    sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream -y 2>&1
-    sudo apt update -y
-    sudo apt install "${pkg}" -y
-    sleep 3
+    echo "Attempting to add the pipewire PPA (may be unavailable for your Ubuntu version)..."
+    if sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream -y 2>&1; then
+        sudo apt update -y
+        sudo apt install "${pkg}" -y
+        sleep 3
+    else
+        echo "PPA unavailable for this distribution version, skipping. The standard package will be used, and missing dependencies will be resolved automatically during installation."
+    fi
 fi
 
 # Install the dependencies and the previously downloaded package
